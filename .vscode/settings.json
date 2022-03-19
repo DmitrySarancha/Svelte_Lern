@@ -1,0 +1,5 @@
+{
+    "svelte-autoimport.filesToScan": "**/*.{ts,svelte,js}",
+    "svelte.enable-ts-plugin": false,
+    "svelte-autoimport.autoComplete": true
+}
