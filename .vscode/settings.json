@@ -1,5 +1,12 @@
 {
+    "css.validate": false,
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    "[svelte]": {
+        "editor.defaultFormatter": "svelte.svelte-vscode"
+    },
     "svelte-autoimport.filesToScan": "**/*.{ts,svelte,js}",
-    "svelte.enable-ts-plugin": false,
-    "svelte-autoimport.autoComplete": true
+    "svelte-autoimport.autoComplete": false,
+    "svelte.enable-ts-plugin": true
 }
