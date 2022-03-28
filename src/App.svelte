@@ -1,33 +1,93 @@
 <script>
-    export let name;
+import { fly } from 'svelte/transition';
+import { circIn } from 'svelte/easing';
+import AddPerson from './Components/Form/AddPerson.svelte';
+import Modal from './Components/Modal.svelte';
+
+// modal
+let showModal = false;
+let isPromo = false;
+
+const openModal = () => {
+    showModal = !showModal;
+    isPromo = !isPromo;
+};
+// modal end
+
+let people = [];
+
+const removePerson = (id) => {
+    people = people.filter((person) => person.id !== id);
+};
+
+const addPerson = (e) => {
+    const data = e.detail;
+    // name;
+    if (data.name === undefined) return alert('Введите имя!');
+    if (isNaN(data.name) === false) return alert('Используйте только строки.');
+    // age
+    if (data.age === undefined) return alert('Введите возраст...');
+    // belte
+    if (data.beltColour === 'Pick the best color')
+        return alert('Выберете цвет!');
+
+    people = [data, ...people];
+    showModal = !showModal;
+};
 </script>
 
-<main>
-    <h1>Hello {name}!</h1>
-    <p>
-        Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn
-        how to build Svelte apps.
-    </p>
+<Modal {isPromo} {showModal} on:click={openModal}>
+    <AddPerson on:addPerson={addPerson} />
+</Modal>
+
+<button class="btn btn-secondary" on:click={openModal}>Open modal</button>
+<main class="flex flex-col  max-w-xl mx-auto">
+    {#each people as person (person.id)}
+        <div
+            transition:fly={{
+                delay: 100,
+                duration: 300,
+                x: 0,
+                x: 200,
+                easing: circIn,
+            }}
+            class="card items-center w-96 bg-base-300 text-base-content shadow-xl mb-8">
+            <div class="card-body">
+                <!-- color person name -->
+                {#if person.beltColour === 'black'}
+                    <h4 class="card-title text-black py-3">{person.name}</h4>
+                {:else if person.beltColour === 'orange'}
+                    <h4 class="card-title text-orange-600 py-3">
+                        {person.name}
+                    </h4>
+                {:else if person.beltColour === 'red'}
+                    <h4 class="card-title text-red-600 py-3">{person.name}</h4>
+                {/if}
+                <!-- color person name -->
+                <p class="pb-6">
+                    {person.age} years old, {person.beltColour} belt.
+                </p>
+                <div class="card-actions justify-center">
+                    <button
+                        class="btn btn-outline btn-secondary mb-3"
+                        on:click={() => removePerson(person.id)}>
+                        delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    {:else}
+        <p class="text-primary">There are no people to show...</p>
+    {/each}
 </main>
 
-<style>
-    main {
-        text-align: center;
-        padding: 1em;
-        max-width: 240px;
-        margin: 0 auto;
-    }
-
-    h1 {
-        color: #ff3e00;
-        text-transform: uppercase;
-        font-size: 4em;
-        font-weight: 100;
-    }
-
-    @media (min-width: 640px) {
-        main {
-            max-width: none;
-        }
-    }
+<style global>
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+/* global */
+body {
+    @apply bg-base-200  w-full h-screen;
+}
+/* global */
 </style>
