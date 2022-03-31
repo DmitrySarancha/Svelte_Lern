@@ -1,5 +1,5 @@
 <script>
-import { fly } from 'svelte/transition';
+import { fly, fade } from 'svelte/transition';
 import { circIn } from 'svelte/easing';
 import AddPerson from './Components/Form/AddPerson.svelte';
 import Modal from './Components/Modal.svelte';
@@ -43,6 +43,7 @@ const addPerson = (e) => {
 <Header on:click={openModal} />
 <!-- modal -->
 <Modal {isPromo} {showModal} on:click={openModal}>
+    <!-- AddPerson form -->
     <AddPerson on:addPerson={addPerson} />
 </Modal>
 
@@ -83,7 +84,11 @@ const addPerson = (e) => {
             </div>
         </div>
     {:else}
-        <p class="text-primary">There are no people to show...</p>
+        <p
+            transition:fade={{ delay: 400, duration: 300 }}
+            class="text-primary text-center">
+            There are no people to show...
+        </p>
     {/each}
 </main>
 
