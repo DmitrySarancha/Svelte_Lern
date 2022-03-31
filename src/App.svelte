@@ -47,8 +47,7 @@ const addPerson = (e) => {
     <AddPerson on:addPerson={addPerson} />
 </Modal>
 
-<button class="btn btn-secondary" on:click={openModal}>Open modal</button>
-<main class="flex flex-col  max-w-xl mx-auto">
+<main class="flex flex-col items-center  max-w-xl mx-auto mt-5">
     {#each people as person (person.id)}
         <div
             transition:fly={{
