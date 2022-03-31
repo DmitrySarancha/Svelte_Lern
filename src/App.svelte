@@ -3,6 +3,7 @@ import { fly } from 'svelte/transition';
 import { circIn } from 'svelte/easing';
 import AddPerson from './Components/Form/AddPerson.svelte';
 import Modal from './Components/Modal.svelte';
+import Header from './Components/Header/Header.svelte';
 
 // modal
 let showModal = false;
@@ -36,6 +37,7 @@ const addPerson = (e) => {
 };
 </script>
 
+<Header on:click={openModal} />
 <Modal {isPromo} {showModal} on:click={openModal}>
     <AddPerson on:addPerson={addPerson} />
 </Modal>
