@@ -11,7 +11,7 @@ let isPromo = false;
 
 const openModal = () => {
     showModal = true;
-    isPromo = true; 
+    isPromo = true;
 };
 // modal end
 
