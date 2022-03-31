@@ -1,0 +1,8 @@
+{
+    "svelteBracketNewLine": false,
+    "svelteIndentScriptAndStyle": false,
+    "svelteAllowShorthand": true,
+    "tabWidth": 4,
+    "useTabs": false,
+    "singleQuote": true
+}

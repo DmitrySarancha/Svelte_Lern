@@ -1,16 +1,17 @@
 <script>
-import { fly } from 'svelte/transition';
+import { fly, fade } from 'svelte/transition';
 import { circIn } from 'svelte/easing';
 import AddPerson from './Components/Form/AddPerson.svelte';
 import Modal from './Components/Modal.svelte';
+import Header from './Components/Header/Header.svelte';
 
 // modal
 let showModal = false;
 let isPromo = false;
 
 const openModal = () => {
-    showModal = !showModal;
-    isPromo = !isPromo;
+    showModal = true;
+    isPromo = true;
 };
 // modal end
 
@@ -32,16 +33,21 @@ const addPerson = (e) => {
         return alert('Выберете цвет!');
 
     people = [data, ...people];
-    showModal = !showModal;
+
+    // modal
+    showModal = false;
+    isPromo = false;
 };
 </script>
 
+<Header on:click={openModal} />
+<!-- modal -->
 <Modal {isPromo} {showModal} on:click={openModal}>
+    <!-- AddPerson form -->
     <AddPerson on:addPerson={addPerson} />
 </Modal>
 
-<button class="btn btn-secondary" on:click={openModal}>Open modal</button>
-<main class="flex flex-col  max-w-xl mx-auto">
+<main class="flex flex-col items-center  max-w-xl mx-auto mt-5">
     {#each people as person (person.id)}
         <div
             transition:fly={{
@@ -51,7 +57,7 @@ const addPerson = (e) => {
                 x: 200,
                 easing: circIn,
             }}
-            class="card items-center w-96 bg-base-300 text-base-content shadow-xl mb-8">
+            class="card items-center w-96 bg-base-300 text-base-content shadow-sm shadow-neutral-content mb-8">
             <div class="card-body">
                 <!-- color person name -->
                 {#if person.beltColour === 'black'}
@@ -77,7 +83,11 @@ const addPerson = (e) => {
             </div>
         </div>
     {:else}
-        <p class="text-primary">There are no people to show...</p>
+        <p
+            transition:fade={{ delay: 400, duration: 300 }}
+            class="text-primary text-center">
+            There are no people to show...
+        </p>
     {/each}
 </main>
 

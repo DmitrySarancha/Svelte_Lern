@@ -37,6 +37,6 @@ export let isPromo = false,
 }
 
 .promo .content {
-    @apply bg-primary-content opacity-100;
+    @apply bg-primary-content opacity-100 shadow-sm shadow-neutral-content;
 }
 </style>
