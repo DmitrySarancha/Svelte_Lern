@@ -57,7 +57,7 @@ const addPerson = (e) => {
                 x: 200,
                 easing: circIn,
             }}
-            class="card items-center w-96 bg-base-300 text-base-content shadow-xl mb-8">
+            class="card items-center w-96 bg-base-300 text-base-content shadow-sm shadow-neutral-content mb-8">
             <div class="card-body">
                 <!-- color person name -->
                 {#if person.beltColour === 'black'}
