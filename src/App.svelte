@@ -10,8 +10,8 @@ let showModal = false;
 let isPromo = false;
 
 const openModal = () => {
-    showModal = !showModal;
-    isPromo = !isPromo;
+    showModal = true;
+    isPromo = true; 
 };
 // modal end
 
@@ -33,11 +33,15 @@ const addPerson = (e) => {
         return alert('Выберете цвет!');
 
     people = [data, ...people];
-    showModal = !showModal;
+
+    // modal
+    showModal = false;
+    isPromo = false;
 };
 </script>
 
 <Header on:click={openModal} />
+<!-- modal -->
 <Modal {isPromo} {showModal} on:click={openModal}>
     <AddPerson on:addPerson={addPerson} />
 </Modal>
